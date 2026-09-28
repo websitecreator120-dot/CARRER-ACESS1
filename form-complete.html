@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Complete - FIREWALL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#020408;--em:#34d399;--cy:#38bdf8;--pu:#a855f7}
+html,body{height:100%;background:var(--bg);color:#f8fafc;font-family:"Plus Jakarta Sans",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#star-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.amb{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 30% 30%,rgba(52,211,153,.08) 0%,transparent 50%),radial-gradient(circle at 70% 70%,rgba(56,189,248,.06) 0%,transparent 50%)}
+.page{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+.card{width:100%;max-width:560px;background:rgba(10,16,32,.82);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:clamp(36px,6vw,56px) clamp(28px,5vw,48px);box-shadow:0 30px 80px rgba(0,0,0,.7);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(52,211,153,.12) 0%,transparent 70%);pointer-events:none}
+.check-ring{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#34d399,#38bdf8);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;box-shadow:0 0 40px rgba(52,211,153,.4);animation:popIn .6s cubic-bezier(.22,1,.36,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:999px;padding:4px 12px;margin-bottom:16px}
+h1{font-family:"Syne",sans-serif;font-size:clamp(24px,5vw,36px);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.02em;margin-bottom:10px}
+.sub{font-size:15px;color:#64748b;line-height:1.6;margin-bottom:28px}
+.info-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px 24px;margin-bottom:24px;text-align:left}
+.info-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.info-row:last-child{border-bottom:none}
+.info-key{color:#475569;font-weight:600}
+.info-val{color:#fff;font-weight:700;font-family:"JetBrains Mono",monospace;font-size:12px}
+.save-status{display:flex;align-items:center;gap:10px;justify-content:center;font-size:13px;font-weight:600;padding:12px 20px;border-radius:12px;margin-bottom:24px;transition:all .4s}
+.save-status.saving{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:var(--cy)}
+.save-status.saved{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--em)}
+.save-status.error{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.25);color:#fb7185}
+.spin{animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.actions{display:flex;flex-direction:column;gap:12px}
+.btn-home{padding:14px 28px;border-radius:14px;border:none;background:linear-gradient(135deg,#34d399,#38bdf8);color:#020408;font-size:15px;font-weight:800;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 24px rgba(52,211,153,.35);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.btn-home:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(52,211,153,.5)}
+.btn-ghost{padding:12px 28px;border-radius:14px;border:1.5px solid rgba(255,255,255,.12);background:transparent;color:#94a3b8;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
+.reg-foot{font-family:"JetBrains Mono",monospace;font-size:10px;color:#1e293b;margin-top:20px}
+</style>
+</head>
+<body>
+<canvas id="star-canvas"></canvas>
+<div class="amb"></div>
+<div class="page">
+ <div class="card">
+  <div class="check-ring">&#10004;</div>
+  <div class="badge">&#10022; Registration Complete</div>
+  <h1>You're all set!</h1>
+  <p class="sub">Your details have been received and saved securely to our database. Welcome to FIREWALL.</p>
+  <div class="save-status saving" id="save-status">
+   <span class="spin">&#9654;</span>
+   <span id="save-msg">Saving your details to database...</span>
+  </div>
+  <div class="info-box" id="info-box" style="display:none">
+   <div class="info-row"><span class="info-key">Registration ID</span><span class="info-val" id="reg-id-val">-</span></div>
+   <div class="info-row"><span class="info-key">Submitted At</span><span class="info-val" id="sub-at">-</span></div>
+   <div class="info-row"><span class="info-key">Source</span><span class="info-val">Visme Form</span></div>
+   <div class="info-row"><span class="info-key">Status</span><span class="info-val" style="color:var(--em)">&#9679; Saved to Database</span></div>
+  </div>
+  <div class="actions">
+   <a href="index.html?signed_in=true" class="btn-home" onclick="try{sessionStorage.setItem('firewall_just_logged_in','true');localStorage.setItem('firewall_signed_in','true');}catch(e){}">&#10022; Go to FIREWALL Dashboard</a>
+   <a href="https://forms.visme.co/formsPlayer/vm8grd7w-untitled-project" class="btn-ghost">&#8617; Fill Form Again</a>
+  </div>
+  <div class="reg-foot" id="reg-foot"></div>
+ </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const cfg={apiKey:"AIzaSyBWNdRLiQjxo0ydumvyA5XOFucfOR-9ZrA",authDomain:"jobers-69267.firebaseapp.com",projectId:"jobers-69267",storageBucket:"jobers-69267.firebasestorage.app",messagingSenderId:"575742680341",appId:"1:575742680341:web:ed17e6b5c11617cefb1d1c"};
+const app=initializeApp(cfg);
+const db=getFirestore(app);
+function getParams(){const p={};window.location.search.slice(1).split("&").forEach(x=>{const[k,v]=x.split("=");if(k)p[decodeURIComponent(k)]=decodeURIComponent(v||"")});return p}
+async function save(data){
+ const st=document.getElementById("save-status"),ms=document.getElementById("save-msg");
+ try{
+  const ref=await addDoc(collection(db,"visme_registrations"),{...data,source:"visme_form",formUrl:"https://forms.visme.co/formsPlayer/vm8grd7w-untitled-project",submittedAt:serverTimestamp(),userAgent:navigator.userAgent,clientTimestamp:new Date().toISOString(),pageReferrer:document.referrer});
+  st.className="save-status saved";
+  st.innerHTML="&#10004; Details saved to database successfully!";
+  const rid="FW-"+ref.id.slice(0,12).toUpperCase();
+  document.getElementById("reg-id-val").textContent=rid;
+  document.getElementById("sub-at").textContent=new Date().toLocaleString("en-IN");
+  document.getElementById("info-box").style.display="block";
+  document.getElementById("reg-foot").textContent="Firestore ID: "+ref.id;
+ }catch(e){
+  st.className="save-status error";
+  st.innerHTML="&#9888; Save error: "+e.message;
+  console.error(e);
+ }
+}
+(async()=>{
+ const p=getParams();
+ const d={name:p.name||p.fullName||p.full_name||"",email:p.email||"",phone:p.phone||p.mobile||"",message:p.message||p.comments||"",rawParams:JSON.stringify(p)};
+ Object.keys(d).forEach(k=>{if(!d[k])delete d[k]});
+ await save(d);
+})()
+</script>
+<script>
+(function(){const c=document.getElementById("star-canvas"),ctx=c.getContext("2d");let W,H,st=[];function rsz(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;st=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,o:Math.random(),sp:.0004+Math.random()*.001}))}rsz();window.addEventListener("resize",rsz);function draw(){ctx.clearRect(0,0,W,H);st.forEach(s=>{s.o+=s.sp;if(s.o>1)s.o=0;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+(Math.abs(Math.sin(s.o*Math.PI))*.55)+")";ctx.fill()});requestAnimationFrame(draw)}draw()})()
+</script>
+</body>
+</html>

@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Solve Your Question — Firewall AI Education & Career Counselor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #050505;
+      --bg-surface: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-focus: #4361ee;
+      --ink: #fafafa;
+      --muted: #8e8e93;
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.35);
+      --blue: #4361ee;
+      --blue-glow: rgba(67, 97, 238, 0.35);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.3);
+      --yellow: #f59e0b;
+      --red: #ef4444;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, rgba(67, 97, 238, 0.12) 0%, transparent 55%),
+                  radial-gradient(circle at 85% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 40%, rgba(168, 85, 247, 0.07) 0%, transparent 40%),
+                  var(--bg);
+      color: var(--ink);
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════════════
+       TOP NAVIGATION
+       ════════════════════════════════════════ */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand-logo-svg {
+      width: 24px;
+      height: 36px;
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    .top-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-pill {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fafafa;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .nav-pill:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .nav-pill-primary {
+      background: #ffffff;
+      color: #050505;
+      font-weight: 700;
+      border: none;
+    }
+
+    .nav-pill-primary:hover {
+      background: #e5e5e5;
+    }
+
+    .candidate-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--green);
+      animation: pulseGlow 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* ════════════════════════════════════════
+       MAIN WRAPPER & HERO
+       ════════════════════════════════════════ */
+    .counselor-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .hero-header {
+      text-align: center;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.65) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(14px, 1.6vw, 17px);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════
+       CATEGORY PILLS & QUICK STARTERS (COLLAPSIBLE)
+       ════════════════════════════════════════ */
+    .quick-starters-card {
+      background: rgba(10, 10, 15, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 22px;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+    }
+
+    .starters-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      cursor: pointer;
+      padding: 2px 0;
+      gap: 12px;
+    }
+
+    .starters-header:hover .starters-label {
+      color: #fafafa;
+    }
+
+    .starters-header:hover .starters-toggle-btn {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+    }
+
+    .starters-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+
+    .starters-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .starters-arrow-icon {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 15px;
+      height: 15px;
+    }
+
+    .quick-starters-card.open .starters-arrow-icon {
+      transform: rotate(180deg);
+    }
+
+    .quick-starters-card.open .starters-toggle-btn {
+      background: rgba(34, 197, 94, 0.12);
+      border-color: rgba(34, 197, 94, 0.35);
+      color: #86efac;
+    }
+
+    .starters-collapsible-body {
+      display: none;
+      padding-top: 16px;
+      margin-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeInCollapse 0.3s ease;
+    }
+
+    .quick-starters-card.open .starters-collapsible-body {
+      display: block;
+    }
+
+    @keyframes fadeInCollapse {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .cat-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cat-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .cat-btn.active {
+      background: rgba(67, 97, 238, 0.15);
+      border-color: rgba(67, 97, 238, 0.4);
+      color: #93c5fd;
+    }
+
+    .preset-prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .prompt-chip-btn {
+      text-align: left;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .prompt-chip-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .prompt-chip-arrow {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════
+       AI CHAT CONSOLE
+       ════════════════════════════════════════ */
+    .chat-console {
+      background: rgba(10, 10, 15, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+                  0 0 40px rgba(67, 97, 238, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 580px;
+    }
+
+    .chat-top-telemetry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .telemetry-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ai-avatar {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #22c55e, #4361ee);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .ai-name-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ai-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ai-status {
+      font-size: 11px;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chat-telemetry-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .tool-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ════════════════════════════════════════
+       MESSAGE STREAM AREA
+       ════════════════════════════════════════ */
+    .message-stream {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 600px;
+      scroll-behavior: smooth;
+    }
+
+    .message-bubble {
+      display: flex;
+      gap: 14px;
+      max-width: 90%;
+      animation: fadeInMsg 0.3s ease;
+    }
+
+    @keyframes fadeInMsg {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-bubble.candidate {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .bubble-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .message-bubble.ai .bubble-avatar {
+      background: linear-gradient(135deg, #4361ee, #22c55e);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(67, 97, 238, 0.3);
+    }
+
+    .message-bubble.candidate .bubble-avatar {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      color: #fff;
+    }
+
+    .bubble-content {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 20px;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .message-bubble.candidate .bubble-content {
+      background: rgba(67, 97, 238, 0.15);
+      border-color: rgba(67, 97, 238, 0.35);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-bubble.ai .bubble-content {
+      border-bottom-left-radius: 4px;
+    }
+
+    /* Structured Clarification Sections */
+    .clarification-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .clarification-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .roadmap-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 8px 0;
+    }
+
+    .timeline-step {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--blue);
+    }
+
+    .timeline-step.phase-start { border-left-color: #22c55e; }
+    .timeline-step.phase-core { border-left-color: #3b82f6; }
+    .timeline-step.phase-projects { border-left-color: #a855f7; }
+    .timeline-step.phase-career { border-left-color: #f59e0b; }
+
+    .step-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .step-heading {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.5;
+    }
+
+    .highlight-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #67e8f9;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    .bubble-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bubble-action-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .bubble-action-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: #fff;
+    }
+
+    .follow-up-container {
+      margin-top: 12px;
+    }
+
+    .follow-up-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #a855f7;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .follow-up-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .follow-up-chip {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      color: #d8b4fe;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .follow-up-chip:hover {
+      background: rgba(168, 85, 247, 0.18);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Subtle Neural Thinking Indicator */
+    .thinking-bubble {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      width: fit-content;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .thinking-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .thinking-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: thinkingBounce 1.2s infinite ease-in-out;
+    }
+
+    .thinking-dot:nth-child(2) { animation-delay: 0.2s; background: var(--green); }
+    .thinking-dot:nth-child(3) { animation-delay: 0.4s; background: var(--purple); }
+
+    @keyframes thinkingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* ════════════════════════════════════════
+       CHAT INPUT PANEL
+       ════════════════════════════════════════ */
+    .chat-input-deck {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: rgba(10, 10, 15, 0.95);
+    }
+
+    .input-form {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 10px 14px;
+      transition: all 0.2s ease;
+    }
+
+    .input-form:focus-within {
+      border-color: rgba(67, 97, 238, 0.5);
+      box-shadow: 0 0 20px rgba(67, 97, 238, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .chat-textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: none;
+      max-height: 120px;
+      min-height: 24px;
+      outline: none;
+    }
+
+    .chat-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .input-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-send {
+      background: #ffffff;
+      color: #050505;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-send:hover {
+      background: #22c55e;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    }
+
+    .input-hint-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding: 0 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ════════════════════════════════════════
+       SETTINGS MODAL (OPTIONAL GEMINI KEY)
+       ════════════════════════════════════════ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .settings-modal-card {
+      background: #0d0d12;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .settings-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .settings-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 12px rgba(67, 97, 238, 0.25);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .topbar { padding: 14px 18px; }
+      .counselor-container { padding: 20px 12px 40px; }
+      .message-stream { padding: 16px; }
+      .message-bubble { max-width: 98%; }
+      .preset-prompts-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="top-left">
+      <a href="index.html" class="brand-link">
+        <svg class="brand-logo-svg" viewBox="0 0 31.5 48.5" fill="none">
+          <path d="M21.5 0 L21.5 19.5 L31.5 19.5 L31.5 29 L10 48.5 L10 28.5 L0.5 28.5 L0.5 18.5 Z" fill="#ffffff"/>
+          <rect x="0.5" y="18.5" width="9" height="10" fill="#22c55e"/>
+          <rect x="22" y="19.5" width="9.5" height="9.5" fill="#4361ee"/>
+        </svg>
+        <span class="brand-title">CAREER AXIS AI</span>
+      </a>
+      <span class="brand-tag">EDUCATION AI</span>
+    </div>
+
+    <div class="top-nav-links">
+      <a href="index.html" class="nav-pill">← Home</a>
+      <a href="education.html" class="nav-pill">Education Plan</a>
+      <a href="typing.html" class="nav-pill">Typing Club</a>
+      <!-- Hidden API Key Button: securely preserved in DOM but invisible to users -->
+      <button type="button" class="nav-pill" id="btn-open-api-modal" title="View or change Gemini API Key" style="display: none !important;">
+        <span>🔑</span>
+        <span id="api-key-badge-label">API Key Active</span>
+      </button>
+      <div class="candidate-chip" id="backend-status-chip">
+        <span class="pulse-dot"></span>
+        <span id="backend-status-text">Education AI Active</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="counselor-container">
+    <!-- Header Banner -->
+    <div class="hero-header">
+      <div class="header-badge">
+        <span class="pulse-dot" style="background: #22c55e; box-shadow: 0 0 10px #22c55e;"></span>
+        <span>Education AI • Academic Tutor</span>
+      </div>
+      <h1 class="hero-title">Academic & Educational AI Tutor</h1>
+      <p class="hero-subtitle">
+        Ask any question in science, mathematics, computer science, history, languages, literature, syllabus concepts, or career guidance to get instant step-by-step academic explanations.
+      </p>
+    </div>
+
+    <!-- Quick Starters & Categories Card (Collapsible: Hidden by default, tap arrow to open) -->
+    <div class="quick-starters-card" id="quick-starters-card">
+      <div class="starters-header" id="starters-header" role="button" aria-expanded="false" aria-controls="starters-collapsible-body" tabindex="0" title="Click to view academic topic options">
+        <span class="starters-label">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Explore Academic Subjects & Sample Questions
+        </span>
+        <button type="button" class="starters-toggle-btn" id="starters-toggle-btn" aria-label="Toggle Topic Options">
+          <span id="starters-toggle-text">Show Options</span>
+          <svg class="starters-arrow-icon" id="starters-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="starters-collapsible-body" id="starters-collapsible-body">
+        <div class="category-tabs" id="category-tabs">
+          <button type="button" class="cat-btn active" data-cat="all">All Topics</button>
+          <button type="button" class="cat-btn" data-cat="science">🔬 Science & Physics</button>
+          <button type="button" class="cat-btn" data-cat="math">📐 Mathematics</button>
+          <button type="button" class="cat-btn" data-cat="cs">💻 Computer Science</button>
+          <button type="button" class="cat-btn" data-cat="school">🎓 Degrees & Syllabi</button>
+          <button type="button" class="cat-btn" data-cat="career">📈 Career Roadmaps</button>
+        </div>
+
+        <div class="preset-prompts-grid" id="preset-prompts-grid">
+          <!-- Dynamically injected preset prompt chips -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive AI Chat Console -->
+    <div class="chat-console">
+      <div class="chat-top-telemetry">
+        <div class="telemetry-left">
+          <div class="ai-avatar">⚡</div>
+          <div class="ai-name-wrap">
+            <span class="ai-name">Firewall Educational AI Tutor</span>
+            <span class="ai-status">
+              <span class="pulse-dot"></span>
+              <span>Neural AI Core Online & Active</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="chat-telemetry-tools">
+          <button type="button" class="tool-btn" id="btn-clear-chat" title="Clear Chat History">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            Clear
+          </button>
+          <button type="button" class="tool-btn" id="btn-export-chat" title="Export as Study Roadmap">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="message-stream" id="message-stream">
+        <!-- Initial Welcome Message from Firewall Neural AI -->
+        <div class="message-bubble ai">
+          <div class="bubble-avatar">⚡</div>
+          <div class="bubble-content">
+            <div class="clarification-block">
+              <div class="clarification-title">
+                <span>✦ Firewall Educational AI Tutor</span>
+              </div>
+              <p>
+                Hello! I am your <strong>Educational AI Tutor</strong>.
+              </p>
+              <p>
+                Ask me <strong>ANY academic or conceptual question</strong> in science, mathematics, computer science, history, literature, or degree paths. I will provide step-by-step explanations, formulas, code, and real-world examples!
+              </p>
+              <div class="follow-up-container">
+                <div class="follow-up-label">Try Asking Any Question:</div>
+                <div class="follow-up-chips">
+                  <button type="button" class="follow-up-chip" onclick="handleChipClick(this.textContent)">What is Newton's third law of motion?</button>
+                  <button type="button" class="follow-up-chip" onclick="handleChipClick(this.textContent)">Explain the difference between speed and velocity</button>
+                  <button type="button" class="follow-up-chip" onclick="handleChipClick(this.textContent)">How does binary search work in computer science?</button>
+                  <button type="button" class="follow-up-chip" onclick="handleChipClick(this.textContent)">Explain photosynthesis with its chemical equation</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input Deck -->
+      <div class="chat-input-deck">
+        <form class="input-form" id="chat-form" onsubmit="event.preventDefault(); submitQuestion();">
+          <textarea
+            class="chat-textarea"
+            id="chat-input"
+            rows="1"
+            placeholder="Ask any educational question (e.g., Explain Newton's laws, What is binary search, Solve quadratic equation)..."
+            required
+          ></textarea>
+
+          <div class="input-actions">
+            <button type="button" class="btn-icon" id="btn-voice-input" title="Voice Input (Speech to Text)">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
+            <button type="submit" class="btn-send" id="btn-send-question" title="Send Question">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="input-hint-row">
+          <span>Press <strong>Enter</strong> to send • <strong>Shift + Enter</strong> for new line</span>
+          <span>⚡ Backend Gemini Knowledge Sync Active</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Settings Modal (Gemini API Key Configuration) -->
+  <div class="modal-backdrop" id="api-modal-backdrop">
+    <div class="settings-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <div>
+          <h2 class="settings-title">Gemini AI Configuration</h2>
+          <p class="settings-desc">Education AI queries Google Gemini AI to answer your exact questions. You can use the provided pre-configured key or paste your own Gemini API key below.</p>
+        </div>
+        <button type="button" id="btn-close-modal" style="background: none; border: none; color: #8e8e93; font-size: 26px; cursor: pointer; padding: 0 4px; line-height: 1;">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="custom-api-key-input">Gemini API Key</label>
+        <input type="text" id="custom-api-key-input" class="form-input" placeholder="AIzaSy... or your custom Gemini key" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div id="key-feedback-box" style="font-size: 12px; margin-bottom: 18px; padding: 10px 14px; border-radius: 8px; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); color: #86efac; display: flex; align-items: center; gap: 8px;">
+        <span class="pulse-dot"></span>
+        <span id="key-feedback-text">Pre-configured Gemini API Key is ready for use.</span>
+      </div>
+
+      <div class="modal-actions" style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="nav-pill" id="btn-reset-key" style="background: rgba(255, 255, 255, 0.05); color: #e2e8f0;">Reset to Default</button>
+        <button type="button" class="nav-pill" id="btn-test-key" style="background: rgba(67, 97, 238, 0.15); border-color: rgba(67, 97, 238, 0.4); color: #93c5fd;">Test Key</button>
+        <button type="button" class="nav-pill nav-pill-primary" id="btn-save-key">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ════════════════════════════════════════
+    // PRESET QUESTIONS DATABASE BY CATEGORY
+    // ════════════════════════════════════════
+    const PRESETS = [
+      // Science & Physics
+      {
+        cat: "science",
+        title: "Newton's Third Law of Motion?",
+        query: "What is Newton's third law of motion? Explain step-by-step with formulas and real-world examples."
+      },
+      {
+        cat: "science",
+        title: "Speed vs. Velocity in Physics?",
+        query: "Explain the difference between speed and velocity in physics with equations and real-world examples."
+      },
+      {
+        cat: "science",
+        title: "Photosynthesis Process & Chemical Equation?",
+        query: "Explain photosynthesis step-by-step including its balanced chemical equation and biological significance."
+      },
+      {
+        cat: "science",
+        title: "Mitosis vs. Meiosis in Cellular Biology?",
+        query: "What is the key difference between mitosis and meiosis in genetics and cell division?"
+      },
+
+      // Mathematics
+      {
+        cat: "math",
+        title: "Quadratic Formula: Derivation & Usage?",
+        query: "What is the quadratic formula, how is it derived from ax² + bx + c = 0, and how do I apply it?"
+      },
+      {
+        cat: "math",
+        title: "What is a Derivative in Calculus?",
+        query: "Explain what a derivative represents geometrically and algebraically in calculus with examples."
+      },
+      {
+        cat: "math",
+        title: "Linear Algebra & Matrices for Machine Learning?",
+        query: "What exact linear algebra concepts (vectors, matrices, dot products, eigenvalues) are essential for AI?"
+      },
+
+      // Computer Science
+      {
+        cat: "cs",
+        title: "How does Binary Search work?",
+        query: "Explain the Binary Search algorithm step-by-step with time complexity (O(log n)) and a code example."
+      },
+      {
+        cat: "cs",
+        title: "Big O Notation Explained Step-by-Step?",
+        query: "What is Big O notation in computer science? Break down O(1), O(log n), O(n), and O(n²) with examples."
+      },
+      {
+        cat: "cs",
+        title: "Complete AI & Machine Learning Roadmap?",
+        query: "Give me the complete step-by-step roadmap to master Artificial Intelligence, PyTorch, and LLMs from scratch."
+      },
+      {
+        cat: "cs",
+        title: "Cybersecurity from zero experience to SOC Analyst?",
+        query: "How do I start in Cybersecurity with zero experience and land my first SOC Analyst or Penetration Tester job?"
+      },
+
+      // Degrees & Syllabi
+      {
+        cat: "school",
+        title: "From 12th standard to Cloud & AI Architect?",
+        query: "What is the exact step-by-step roadmap from 12th standard (High School) to becoming a Cloud and AI Architect?"
+      },
+      {
+        cat: "school",
+        title: "B.Tech vs BCA vs Self-Taught Bootcamp?",
+        query: "Compare B.Tech Computer Science, BCA/MCA, and Self-Taught bootcamps for landing top international tech jobs."
+      },
+
+      // Career Roadmaps
+      {
+        cat: "career",
+        title: "How to crack FAANG & Top Tech Interviews?",
+        query: "What is the proven strategy to prepare for Data Structures, Algorithms, and System Design interviews for top tech firms?"
+      },
+      {
+        cat: "career",
+        title: "Salary negotiation frameworks for engineers?",
+        query: "What are the best frameworks and tactics for tech candidates to negotiate a 40%+ higher salary offer?"
+      }
+    ];
+
+    // ════════════════════════════════════════
+    // DEEP NEURAL KNOWLEDGE CORE (Offline & Backend Sync)
+    // ════════════════════════════════════════
+    const NEURAL_KNOWLEDGE = {
+      cybersecurity: {
+        title: "Zero-to-Hero Cybersecurity Engineering Roadmap",
+        summary: "Cybersecurity is one of the highest-demand careers worldwide. You do NOT need a math degree to excel; you need hands-on networking, Linux systems proficiency, threat modeling, and real lab experience.",
+        phases: [
+          {
+            badge: "PHASE 1: STARTING FOUNDATIONS (MONTHS 1 - 3)",
+            heading: "Computer Networking, Operating Systems & Scripting",
+            desc: "Master the TCP/IP stack, subnetting (CIDR), DNS, HTTP/S, and OSI model. Learn Linux command line fundamentals (Bash, permissions, systemd) and basic Python scripting for automation.",
+            skills: ["TCP/IP", "Wireshark", "Linux CLI", "Python", "Git"]
+          },
+          {
+            badge: "PHASE 2: SECURITY FUNDAMENTALS & LABS (MONTHS 4 - 6)",
+            heading: "Security Architecture, Defensive Protocols & Offensive Tools",
+            desc: "Learn core defense concepts: symmetric vs asymmetric encryption (AES, RSA, Ed25519), firewalls, SIEM logs, and zero-trust perimeter defense. Set up virtual labs on VirtualBox / Kali Linux and practice on TryHackMe and Hack The Box.",
+            skills: ["Nmap", "Burp Suite", "Metasploit", "Splunk", "Snort"]
+          },
+          {
+            badge: "PHASE 3: TARGETED CERTIFICATIONS & PROOF (MONTHS 7 - 9)",
+            heading: "Industry Credentials That Pass HR Filters",
+            desc: "Earn CompTIA Security+ as your baseline filter. If pursuing defense/blue team, target BTL1 (Blue Team Level 1) or CySA+. If pursuing penetration testing/red team, target PNPT or OSCP.",
+            skills: ["CompTIA Security+", "BTL1", "PNPT", "OSCP"]
+          },
+          {
+            badge: "PHASE 4: CAREER OUTCOMES & SENIOR ENDING (MONTHS 10+)",
+            heading: "Landing SOC Analyst Tier 1 → Penetration Tester → CISO",
+            desc: "Publish write-ups of captured flags on GitHub and LinkedIn. Apply for Junior SOC Analyst, Security Analyst, or Junior Pentester ($70k - $120k). Scale into Security Architect or DevSecOps Engineer ($160k+).",
+            skills: ["Threat Hunting", "Incident Response", "DevSecOps", "Cloud Security"]
+          }
+        ],
+        pitfalls: "Do not waste money on expensive $15,000 bootcamps. Avoid collecting theoretical certificates without building a documented portfolio of hands-on TryHackMe / GitHub labs.",
+        followUps: [
+          "What is the daily routine of a Junior SOC Analyst?",
+          "How to set up a home lab for malware analysis?",
+          "Best free resources to prepare for CompTIA Security+?"
+        ]
+      },
+
+      ai_ml: {
+        title: "Artificial Intelligence & Machine Learning Architect Pathway",
+        summary: "AI engineering requires combining software engineering with applied linear algebra, calculus, and deep learning frameworks like PyTorch and Hugging Face.",
+        phases: [
+          {
+            badge: "PHASE 1: FOUNDATIONS (MONTHS 1 - 3)",
+            heading: "Python Mastery, Vector Math & Data Wrangling",
+            desc: "Master Python OOP, NumPy vectorization, Pandas data structures, and Matplotlib. Study applied Linear Algebra (matrix multiplication, eigenvectors), Multivariable Calculus (gradients, backpropagation), and Probability.",
+            skills: ["Python 3", "NumPy", "Pandas", "Linear Algebra", "Calculus"]
+          },
+          {
+            badge: "PHASE 2: CLASSICAL MACHINE LEARNING (MONTHS 4 - 6)",
+            heading: "Statistical Learning & Scikit-Learn",
+            desc: "Understand regression, decision trees, random forests, SVMs, clustering, and cross-validation. Learn feature engineering, regularization (L1/L2), and model evaluation metrics (ROC-AUC, F1-Score).",
+            skills: ["Scikit-Learn", "XGBoost", "Feature Engineering", "Kaggle"]
+          },
+          {
+            badge: "PHASE 3: DEEP LEARNING & GENERATIVE AI (MONTHS 7 - 10)",
+            heading: "PyTorch, Transformers, LLMs & MLOps",
+            desc: "Build neural networks from scratch in PyTorch. Master Convolutional Networks (CNNs), Recurrent Networks (LSTMs), and Transformer self-attention. Learn fine-tuning LLMs with LoRA/QLoRA and deploying with FastAPI and Docker.",
+            skills: ["PyTorch", "Hugging Face", "LangChain / LlamaIndex", "Docker", "MLflow"]
+          },
+          {
+            badge: "PHASE 4: INDUSTRY OUTCOMES & SENIOR MASTERY (MONTHS 11+)",
+            heading: "Landing AI Engineer / ML Scientist ($130k - $220k)",
+            desc: "Deploy production pipelines serving predictions with low latency. Publish open-source models on Hugging Face. Progress from Junior ML Engineer to Senior AI System Architect.",
+            skills: ["vLLM", "TensorRT", "CUDA Basics", "Distributed Training"]
+          }
+        ],
+        pitfalls: "Do not get trapped only watching theory tutorials. You must build, train, deploy, and benchmark real models with clean GitHub repositories.",
+        followUps: [
+          "How to fine-tune an open-source LLM like Llama 3 on custom data?",
+          "Is a PhD required for top AI research roles?",
+          "How to deploy Machine Learning models using Docker and Kubernetes?"
+        ]
+      },
+
+      school_to_architect: {
+        title: "High School (12th Standard) to Cloud & Software Architect Roadmap",
+        summary: "The transition from high school to a senior tech architect is a structured multi-year journey where early focus on core computer science foundations compounds into rapid career acceleration.",
+        phases: [
+          {
+            badge: "PHASE 1: HIGH SCHOOL TO COLLEGE (YEAR 1)",
+            heading: "Strong Degree Selection & Programming Fundamentals",
+            desc: "Enroll in B.Tech Computer Science, BS in CS, or BCA. In parallel, learn C++ or Java to understand memory, pointers, and object-oriented architecture. Build strong problem-solving habits on LeetCode.",
+            skills: ["C++ / Java", "Discrete Math", "OOP Concepts", "Algorithms"]
+          },
+          {
+            badge: "PHASE 2: CORE CS DISCIPLINES & WEB STACK (YEAR 2)",
+            heading: "Data Structures, Database Internals & Full-Stack Systems",
+            desc: "Master Data Structures (Trees, Graphs, DP). Study Operating Systems, Computer Networks, and Database Management Systems (SQL & ACID properties). Build full-stack applications with React, Node.js, and PostgreSQL.",
+            skills: ["DSA", "PostgreSQL", "Node.js", "React", "Linux"]
+          },
+          {
+            badge: "PHASE 3: DISTRIBUTED SYSTEMS & INTERNSHIPS (YEAR 3 - 4)",
+            heading: "Cloud Certifications, Microservices & Summer Internships",
+            desc: "Learn Cloud Architecture (AWS or Google Cloud). Earn AWS Solutions Architect Associate. Build event-driven architectures with Kafka and Redis. Land a software engineering summer internship.",
+            skills: ["AWS", "Docker", "Kubernetes", "Redis", "Kafka"]
+          },
+          {
+            badge: "PHASE 4: CAREER ACCELERATION TO ARCHITECT (POST-GRAD + 4 YEARS)",
+            heading: "Software Engineer → Senior Engineer → Solutions Architect ($180k+)",
+            desc: "Excel in your first engineering job by owning end-to-end service reliability, scaling databases, and designing multi-region fault tolerance. Progress into Principal Architect driving company-wide tech decisions.",
+            skills: ["System Design", "High Availability", "FinOps", "Team Leadership"]
+          }
+        ],
+        pitfalls: "Do not depend solely on your college syllabus. 80% of cutting-edge skills (Docker, AWS, System Design) are learned through personal projects and open-source contributions.",
+        followUps: [
+          "How to balance college exams with LeetCode and project building?",
+          "Which AWS certifications are worth getting as a student?",
+          "What questions are asked in college campus placement interviews?"
+        ]
+      },
+
+      degree_comparison: {
+        title: "B.Tech CS vs BCA/MCA vs Self-Taught Bootcamp: Complete Comparison",
+        summary: "Each pathway has distinct trade-offs in time, upfront tuition, campus placement opportunities, and employer perception.",
+        phases: [
+          {
+            badge: "OPTION A: B.TECH / BE IN COMPUTER SCIENCE",
+            heading: "The Traditional Gold Standard (4 Years)",
+            desc: "Pros: Direct on-campus recruitment, smooth eligibility for foreign Master's degrees and visas (H1B/EU Blue Card), deep theoretical foundations. Cons: High tuition and 4-year time investment.",
+            skills: ["Campus Placements", "Visa Eligibility", "Deep CS Theory"]
+          },
+          {
+            badge: "OPTION B: BCA + MCA PATHWAY",
+            heading: "The Flexible Degree Track (3 + 2 Years)",
+            desc: "Pros: Lower entrance exam pressure, accessible tuition. Cons: BCA alone often faces initial salary gating in Tier-1 firms; completing an MCA bridges the gap to B.Tech parity.",
+            skills: ["Software Engineering", "Web Tech", "Cost Effective"]
+          },
+          {
+            badge: "OPTION C: SELF-TAUGHT / CODING BOOTCAMP",
+            heading: "The Speed & Skills Route (6 - 12 Months)",
+            desc: "Pros: Fastest time to market, practical hands-on modern stack. Cons: Higher friction getting initial HR interviews without an accredited degree; depends 100% on portfolio proof.",
+            skills: ["Fast Employment", "Real Projects", "Portfolio Driven"]
+          },
+          {
+            badge: "FINAL RECOMMENDATION",
+            heading: "Which Should You Choose?",
+            desc: "If you can enroll in a recognized B.Tech program, take it. If you choose BCA or non-tech, aggressively build GitHub repositories, open-source PRs, and pursue an MCA or accredited online degree to guarantee long-term executive mobility.",
+            skills: ["GitHub Portfolio", "System Design", "Open Source"]
+          }
+        ],
+        pitfalls: "Never believe that a degree guarantees a job. Skills and problem-solving capability are tested in every technical interview regardless of your degree pedigree.",
+        followUps: [
+          "Can a BCA student get placed in Google or Microsoft?",
+          "How to build an impressive GitHub profile that attracts recruiters?",
+          "Is an online degree accepted for tech job applications?"
+        ]
+      }
+    };
+
+    // ════════════════════════════════════════
+    // DOM ELEMENTS & STATE
+    // ════════════════════════════════════════
+    const messageStream = document.getElementById('message-stream');
+    const chatInput = document.getElementById('chat-input');
+    const categoryTabs = document.getElementById('category-tabs');
+    const presetPromptsGrid = document.getElementById('preset-prompts-grid');
+    const btnClearChat = document.getElementById('btn-clear-chat');
+    const btnExportChat = document.getElementById('btn-export-chat');
+    const btnVoiceInput = document.getElementById('btn-voice-input');
+    const backendStatusText = document.getElementById('backend-status-text');
+
+    let isThinking = false;
+    const chatHistory = [];
+
+    // Check backend connection health
+    async function checkBackendHealth() {
+      const endpoints = ['/api/health', 'http://localhost:3000/api/health'];
+      for (const endpoint of endpoints) {
+        try {
+          const res = await fetch(endpoint, { method: 'GET' });
+          if (res.ok) {
+            const data = await res.json();
+            if (backendStatusText) {
+              backendStatusText.textContent = `Direct Gemini 2.5 Proxy (${data.status})`;
+            }
+            return;
+          }
+        } catch (e) {}
+      }
+    }
+
+    // Render Preset Prompt Chips
+    function renderPresetChips(category = 'all') {
+      presetPromptsGrid.innerHTML = '';
+      const filtered = category === 'all' ? PRESETS : PRESETS.filter(p => p.cat === category);
+
+      filtered.forEach(item => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'prompt-chip-btn';
+        btn.innerHTML = `
+          <span>${item.title}</span>
+          <span class="prompt-chip-arrow">→</span>
+        `;
+        btn.onclick = () => {
+          chatInput.value = item.query;
+          submitQuestion();
+        };
+        presetPromptsGrid.appendChild(btn);
+      });
+    }
+
+    // Category Tabs Switching
+    categoryTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPresetChips(btn.getAttribute('data-cat'));
+    });
+
+    // ════════════════════════════════════════
+    // COLLAPSIBLE STARTERS TOGGLE (SHOW / HIDE OPTIONS)
+    // ════════════════════════════════════════
+    const quickStartersCard = document.getElementById('quick-starters-card');
+    const startersHeader = document.getElementById('starters-header');
+    const startersToggleBtn = document.getElementById('starters-toggle-btn');
+    const startersToggleText = document.getElementById('starters-toggle-text');
+
+    function toggleStartersCollapse(e) {
+      if (e) e.stopPropagation();
+      const isOpen = quickStartersCard.classList.toggle('open');
+      startersHeader.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (startersToggleText) {
+        startersToggleText.textContent = isOpen ? 'Hide Options' : 'Show Options';
+      }
+    }
+
+    if (startersHeader) {
+      startersHeader.addEventListener('click', toggleStartersCollapse);
+      startersHeader.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleStartersCollapse();
+        }
+      });
+    }
+
+    // Auto-resize chat textarea
+    chatInput.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // Submit on Enter key (Shift+Enter for newline)
+    chatInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        submitQuestion();
+      }
+    });
+
+    // Handle Quick Follow-up Chip Click
+    window.handleChipClick = function (text) {
+      chatInput.value = text;
+      submitQuestion();
+    };
+
+    // ════════════════════════════════════════
+    // MARKDOWN PARSER FOR EDUCATIONAL GUIDANCE
+    // ════════════════════════════════════════
+    function renderMarkdown(md) {
+      if (!md) return '';
+      let text = escapeHTML(md);
+
+      // Code blocks: ```code```
+      text = text.replace(/```([a-z0-9_-]*)\n([\s\S]*?)```/gim, (m, lang, code) => {
+        return `<pre style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto; margin: 12px 0; color: #a5f3fc;"><code>${code}</code></pre>`;
+      });
+
+      // Headers: ###, ##, #
+      text = text.replace(/^### (.*$)/gim, '<h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 18px 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">$1</h3>');
+      text = text.replace(/^## (.*$)/gim, '<h2 style="font-size: 18px; font-weight: 800; color: #ffffff; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 8px;">$1</h2>');
+      text = text.replace(/^# (.*$)/gim, '<h1 style="font-size: 21px; font-weight: 800; color: #ffffff; margin: 22px 0 12px 0;">$1</h1>');
+
+      // Horizontal lines
+      text = text.replace(/^---$/gim, '<hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 16px 0;">');
+
+      // Bold & Italic
+      text = text.replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>');
+      text = text.replace(/\*(.*?)\*/gim, '<em style="color: #cbd5e1;">$1</em>');
+
+      // Inline code
+      text = text.replace(/`([^`]+)`/gim, '<code style="background: rgba(255,255,255,0.08); color: #67e8f9; padding: 2px 6px; border-radius: 4px; font-family: \'JetBrains Mono\', monospace; font-size: 12px;">$1</code>');
+
+      // Bullet items
+      text = text.replace(/^\* (.*$)/gim, '<li style="margin-left: 20px; margin-bottom: 6px; list-style-type: disc; color: rgba(255,255,255,0.9);">$1</li>');
+      text = text.replace(/^- (.*$)/gim, '<li style="margin-left: 20px; margin-bottom: 6px; list-style-type: disc; color: rgba(255,255,255,0.9);">$1</li>');
+
+      // Numbered items
+      text = text.replace(/^\d+\.\s+(.*$)/gim, '<li style="margin-left: 20px; margin-bottom: 6px; list-style-type: decimal; color: rgba(255,255,255,0.9);">$1</li>');
+
+      // Paragraphs
+      text = text.replace(/\n\n+/g, '</p><p style="margin-bottom: 12px; line-height: 1.65;">');
+      text = '<p style="margin-bottom: 12px; line-height: 1.65;">' + text + '</p>';
+
+      return text;
+    }
+
+    // ════════════════════════════════════════
+    // QUESTION SUBMISSION & AI REASONING
+    // ════════════════════════════════════════
+    async function submitQuestion() {
+      const question = chatInput.value.trim();
+      if (!question || isThinking) return;
+
+      chatInput.value = '';
+      chatInput.style.height = 'auto';
+
+      // 1. Append Candidate Message Bubble
+      appendCandidateBubble(question);
+      chatHistory.push({ role: 'user', text: question });
+
+      // 2. Append Thinking Indicator
+      isThinking = true;
+      const thinkingEl = appendThinkingBubble();
+      scrollToBottom();
+
+      try {
+        // 3. Process Answer from Backend Proxy Service
+        const answerData = await fetchAIClarification(question);
+
+        // Remove thinking bubble
+        if (thinkingEl) thinkingEl.remove();
+
+        // 4. Append AI Clarification Bubble
+        appendAIResponseBubble(answerData);
+        if (answerData && answerData.reply) {
+          chatHistory.push({ role: 'model', text: answerData.reply });
+        }
+      } catch (err) {
+        if (thinkingEl) thinkingEl.remove();
+        appendAIResponseBubble({
+          title: "Educational Guidance",
+          reply: "I am an Education and Career Counselor. Please ask any question about academic pathways, college admissions, engineering branches, certifications, or career trajectories."
+        });
+      } finally {
+        isThinking = false;
+        scrollToBottom();
+      }
+    }
+
+    function appendCandidateBubble(text) {
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble candidate';
+      bubble.innerHTML = `
+        <div class="bubble-avatar">👤</div>
+        <div class="bubble-content">
+          <p>${escapeHTML(text)}</p>
+        </div>
+      `;
+      messageStream.appendChild(bubble);
+    }
+
+    function appendThinkingBubble() {
+      const thinking = document.createElement('div');
+      thinking.className = 'thinking-bubble';
+      thinking.innerHTML = `
+        <div class="thinking-dots">
+          <span class="thinking-dot"></span>
+          <span class="thinking-dot"></span>
+          <span class="thinking-dot"></span>
+        </div>
+        <span>Consulting Gemini Education AI & structuring guidance...</span>
+      `;
+      messageStream.appendChild(thinking);
+      return thinking;
+    }
+
+    function appendAIResponseBubble(data) {
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble ai';
+
+      let bodyHTML = '';
+
+      if (data.reply) {
+        // Render markdown from external AI backend directly
+        bodyHTML = `
+          <div class="clarification-markdown-body" style="line-height: 1.65; color: rgba(255,255,255,0.92);">
+            ${renderMarkdown(data.reply)}
+          </div>
+        `;
+      } else if (data.phases && data.phases.length > 0) {
+        // Render structured phases
+        let phasesHTML = '<div class="roadmap-timeline">';
+        data.phases.forEach((phase, index) => {
+          const phaseClass = index === 0 ? 'phase-start' : (index === 1 ? 'phase-core' : (index === 2 ? 'phase-projects' : 'phase-career'));
+          let skillsHTML = '';
+          if (phase.skills && phase.skills.length > 0) {
+            skillsHTML = '<div style="margin-top: 6px;">' + phase.skills.map(s => `<span class="highlight-pill">${escapeHTML(s)}</span>`).join('') + '</div>';
+          }
+          phasesHTML += `
+            <div class="timeline-step ${phaseClass}">
+              <span class="step-badge">${escapeHTML(phase.badge || `STEP 0${index+1}`)}</span>
+              <h4 class="step-heading">${escapeHTML(phase.heading)}</h4>
+              <p class="step-desc">${escapeHTML(phase.desc)}</p>
+              ${skillsHTML}
+            </div>
+          `;
+        });
+        phasesHTML += '</div>';
+
+        bodyHTML = `
+          <p style="font-weight: 500;">${escapeHTML(data.summary || '')}</p>
+          ${phasesHTML}
+        `;
+      }
+
+      // Academic badge
+      const modelBadge = `<span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--green); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 4px; padding: 2px 6px;">✦ Academic Clarification</span>`;
+
+      bubble.innerHTML = `
+        <div class="bubble-avatar">⚡</div>
+        <div class="bubble-content">
+          <div class="clarification-block">
+            <div class="clarification-title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>✦ Firewall Educational AI Tutor</span>
+              ${modelBadge}
+            </div>
+            ${bodyHTML}
+
+            <div class="bubble-actions-row">
+              <button type="button" class="bubble-action-btn" onclick="copyClarification(this)">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy Guidance
+              </button>
+              <button type="button" class="bubble-action-btn" onclick="readAloudFromBubble(this)">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                Listen
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      messageStream.appendChild(bubble);
+    }
+
+    // ════════════════════════════════════════
+    // GEMINI AI BACKEND & CLIENT DUAL INTEGRATION
+    // ════════════════════════════════════════
+    const DEFAULT_GEMINI_KEY = 'AQ.Ab8RN6LkKt2XYsOJow3zYlu33Lrl-Dey5gkrMPXkP4MLIzUMgA';
+
+    function getActiveGeminiKey() {
+      const stored = localStorage.getItem('firewall_gemini_api_key');
+      return (stored && stored.trim()) ? stored.trim() : DEFAULT_GEMINI_KEY;
+    }
+
+    function isCustomKeyActive() {
+      const stored = localStorage.getItem('firewall_gemini_api_key');
+      return !!(stored && stored.trim());
+    }
+
+    function updateApiKeyBadge() {
+      const label = document.getElementById('api-key-badge-label');
+      if (!label) return;
+      if (isCustomKeyActive()) {
+        label.textContent = 'Custom API Key Active';
+      } else {
+        label.textContent = 'Gemini AI Ready';
+      }
+    }
+
+    const EDUCATIONAL_SYSTEM_PROMPT = `You are an expert, encouraging Educational AI Tutor designed strictly for academic learning.
+
+Your Core Directives:
+1. Direct Focus: Answer ONLY questions related to education, science, mathematics, computer science, history, languages, literature, and general academics.
+2. Structure: Break down complex concepts step-by-step.
+   - Start with a direct, 1-2 sentence core definition or summary.
+   - Use clear bullet points, formulas, or short code blocks where relevant.
+   - Provide a simple real-world example to illustrate the concept.
+3. Tone & Clarity: Keep your tone academic, precise, engaging, and clear. Avoid filler phrases like "Sure! Here is the answer."
+4. Off-Topic Filtering: If a user asks something unrelated to learning or education (such as entertainment gossip, casual banter, or off-topic chat), politely decline by stating: "I am designed specifically as an educational assistant. Please ask an academic, scientific, or conceptual question to continue!"`;
+
+    /**
+     * Direct browser call to Google Gemini AI API
+     */
+    async function callGeminiDirectly(query, history = []) {
+      const activeKey = getActiveGeminiKey();
+      const models = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'gemini-3-flash-preview'];
+
+      const contents = [];
+      if (Array.isArray(history) && history.length > 0) {
+        for (const item of history.slice(-6)) {
+          if (item && item.text) {
+            contents.push({
+              role: item.role === 'model' || item.role === 'ai' ? 'model' : 'user',
+              parts: [{ text: String(item.text) }]
+            });
+          }
+        }
+      }
+      contents.push({
+        role: 'user',
+        parts: [{ text: String(query) }]
+      });
+
+      const requestPayload = {
+        system_instruction: {
+          parts: [{ text: EDUCATIONAL_SYSTEM_PROMPT }]
+        },
+        contents: contents,
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95
+        }
+      };
+
+      let lastError = null;
+      for (const model of models) {
+        try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${activeKey}`;
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestPayload)
+          });
+
+          const data = await res.json();
+          if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+            const text = data.candidates[0].content.parts.map(p => p.text || '').join('').trim();
+            if (text) {
+              return {
+                success: true,
+                modelUsed: model,
+                reply: text
+              };
+            }
+          }
+
+          if (data && data.error) {
+            lastError = data.error.message || JSON.stringify(data.error);
+          }
+        } catch (err) {
+          lastError = err.message;
+        }
+      }
+
+      throw new Error(lastError || 'Unable to connect to Google Gemini service.');
+    }
+
+    /**
+     * Primary AI Dispatcher:
+     * 1. Tries backend proxy server (/api/chat)
+     * 2. If backend is unavailable, connects directly to Google Gemini API from browser
+     */
+    async function fetchAIClarification(query) {
+      const customKey = isCustomKeyActive() ? getActiveGeminiKey() : null;
+      const endpoints = ['/api/chat', 'http://localhost:3000/api/chat'];
+
+      // 1. Try local or hosted backend service
+      for (const endpoint of endpoints) {
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: query,
+              apiKey: customKey,
+              history: chatHistory.slice(-6)
+            })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.reply) {
+              return data;
+            }
+          }
+        } catch (e) {
+          // Continue to next endpoint or direct client call
+        }
+      }
+
+      // 2. Direct browser connection to Google Gemini API
+      try {
+        const directResult = await callGeminiDirectly(query, chatHistory);
+        return directResult;
+      } catch (err) {
+        console.warn('[Gemini AI] Direct client call failed:', err.message);
+        return {
+          modelUsed: 'gemini-tutor-notice',
+          reply: `### Notice: Unable to Reach Gemini AI\n\nGoogle Gemini could not process this request.\n\n**Details:** ${escapeHTML(err.message)}\n\n**How to fix:**\n* Ensure your device has an active internet connection.\n* If you have a custom Gemini API Key from Google AI Studio, click the **🔑 API Key** button above to test and save it.\n* Alternatively, run \`node server.js\` in your project directory to activate the local proxy.`
+        };
+      }
+    }
+
+    function scrollToBottom() {
+      messageStream.scrollTop = messageStream.scrollHeight;
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Copy Guidance to clipboard
+    window.copyClarification = function (btn) {
+      const bubble = btn.closest('.bubble-content');
+      if (!bubble) return;
+      const text = bubble.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span>✓ Copied!</span>';
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+      });
+    };
+
+    // Text to Speech
+    window.readAloudFromBubble = function (btn) {
+      const bubble = btn.closest('.bubble-content');
+      if (!bubble) return;
+      const text = bubble.innerText;
+      if (!('speechSynthesis' in window)) {
+        alert('Text-to-speech is not supported in this browser.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text.slice(0, 1500));
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    };
+
+    // Voice recognition (Speech to text)
+    if (btnVoiceInput) {
+      btnVoiceInput.addEventListener('click', function () {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          alert('Speech recognition is not supported in this browser.');
+          return;
+        }
+        const rec = new SpeechRec();
+        rec.lang = 'en-US';
+        btnVoiceInput.style.color = '#ef4444';
+        rec.onresult = function (e) {
+          chatInput.value = e.results[0][0].transcript;
+          btnVoiceInput.style.color = '';
+          submitQuestion();
+        };
+        rec.onerror = function () {
+          btnVoiceInput.style.color = '';
+        };
+        rec.start();
+      });
+    }
+
+    // Clear Chat
+    if (btnClearChat) {
+      btnClearChat.addEventListener('click', function () {
+        chatHistory.length = 0;
+        messageStream.innerHTML = `
+          <div class="message-bubble ai">
+            <div class="bubble-avatar">⚡</div>
+            <div class="bubble-content">
+              <p>Chat cleared. Ask me any educational, scientific, conceptual, or academic question to get an authoritative structured answer from Gemini AI.</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Export Chat as Markdown
+    if (btnExportChat) {
+      btnExportChat.addEventListener('click', function () {
+        let md = "# Firewall AI — Educational Study Guide\n\n";
+        md += `Exported on: ${new Date().toLocaleString()}\n\n---\n\n`;
+
+        document.querySelectorAll('.message-bubble').forEach(b => {
+          const isAI = b.classList.contains('ai');
+          md += `### ${isAI ? 'Firewall Educational AI Tutor' : 'Student Question'}\n`;
+          md += `${b.querySelector('.bubble-content').innerText}\n\n---\n\n`;
+        });
+
+        const blob = new Blob([md], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Educational_AI_Study_Guide_${Date.now()}.md`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    // ════════════════════════════════════════
+    // API KEY MODAL LOGIC
+    // ════════════════════════════════════════
+    const apiModalBackdrop = document.getElementById('api-modal-backdrop');
+    const btnOpenApiModal = document.getElementById('btn-open-api-modal');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const customApiKeyInput = document.getElementById('custom-api-key-input');
+    const keyFeedbackBox = document.getElementById('key-feedback-box');
+    const keyFeedbackText = document.getElementById('key-feedback-text');
+    const btnResetKey = document.getElementById('btn-reset-key');
+    const btnTestKey = document.getElementById('btn-test-key');
+    const btnSaveKey = document.getElementById('btn-save-key');
+
+    function openModal() {
+      if (!apiModalBackdrop) return;
+      const stored = localStorage.getItem('firewall_gemini_api_key') || '';
+      customApiKeyInput.value = stored;
+      if (stored) {
+        keyFeedbackBox.style.background = 'rgba(67, 97, 238, 0.1)';
+        keyFeedbackBox.style.borderColor = 'rgba(67, 97, 238, 0.35)';
+        keyFeedbackBox.style.color = '#93c5fd';
+        keyFeedbackText.textContent = 'Custom Gemini API Key is saved and active.';
+      } else {
+        keyFeedbackBox.style.background = 'rgba(34, 197, 94, 0.08)';
+        keyFeedbackBox.style.borderColor = 'rgba(34, 197, 94, 0.25)';
+        keyFeedbackBox.style.color = '#86efac';
+        keyFeedbackText.textContent = 'Pre-configured Gemini API Key is ready for use.';
+      }
+      apiModalBackdrop.classList.add('active');
+    }
+
+    function closeModal() {
+      if (apiModalBackdrop) apiModalBackdrop.classList.remove('active');
+    }
+
+    if (btnOpenApiModal) btnOpenApiModal.addEventListener('click', openModal);
+    if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+    if (apiModalBackdrop) {
+      apiModalBackdrop.addEventListener('click', (e) => {
+        if (e.target === apiModalBackdrop) closeModal();
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && apiModalBackdrop?.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    if (btnSaveKey) {
+      btnSaveKey.addEventListener('click', () => {
+        const val = customApiKeyInput.value.trim();
+        if (val) {
+          localStorage.setItem('firewall_gemini_api_key', val);
+          keyFeedbackBox.style.background = 'rgba(34, 197, 94, 0.12)';
+          keyFeedbackBox.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+          keyFeedbackBox.style.color = '#86efac';
+          keyFeedbackText.textContent = 'Custom API Key saved successfully!';
+        } else {
+          localStorage.removeItem('firewall_gemini_api_key');
+          keyFeedbackBox.style.background = 'rgba(34, 197, 94, 0.08)';
+          keyFeedbackBox.style.borderColor = 'rgba(34, 197, 94, 0.25)';
+          keyFeedbackBox.style.color = '#86efac';
+          keyFeedbackText.textContent = 'Reset to system pre-configured Gemini Key.';
+        }
+        updateApiKeyBadge();
+        setTimeout(closeModal, 700);
+      });
+    }
+
+    if (btnResetKey) {
+      btnResetKey.addEventListener('click', () => {
+        localStorage.removeItem('firewall_gemini_api_key');
+        customApiKeyInput.value = '';
+        keyFeedbackBox.style.background = 'rgba(34, 197, 94, 0.08)';
+        keyFeedbackBox.style.borderColor = 'rgba(34, 197, 94, 0.25)';
+        keyFeedbackBox.style.color = '#86efac';
+        keyFeedbackText.textContent = 'Reverted to system default Gemini Key.';
+        updateApiKeyBadge();
+      });
+    }
+
+    if (btnTestKey) {
+      btnTestKey.addEventListener('click', async () => {
+        const keyToTest = customApiKeyInput.value.trim() || DEFAULT_GEMINI_KEY;
+        keyFeedbackText.textContent = 'Testing connection with Gemini 3.8 Flash...';
+        keyFeedbackBox.style.color = '#e2e8f0';
+
+        try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${keyToTest}`;
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: 'Hello' }] }] })
+          });
+          const data = await res.json();
+          if (data && data.candidates && data.candidates[0]) {
+            keyFeedbackBox.style.background = 'rgba(34, 197, 94, 0.15)';
+            keyFeedbackBox.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+            keyFeedbackBox.style.color = '#4ade80';
+            keyFeedbackText.textContent = '✓ Success! Connected to Google Gemini AI.';
+          } else {
+            keyFeedbackBox.style.background = 'rgba(239, 68, 68, 0.12)';
+            keyFeedbackBox.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+            keyFeedbackBox.style.color = '#f87171';
+            keyFeedbackText.textContent = 'Validation error: ' + (data?.error?.message || 'Invalid key response');
+          }
+        } catch (err) {
+          keyFeedbackBox.style.background = 'rgba(239, 68, 68, 0.12)';
+          keyFeedbackBox.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+          keyFeedbackBox.style.color = '#f87171';
+          keyFeedbackText.textContent = 'Network error: ' + err.message;
+        }
+      });
+    }
+
+    // Initialize
+    updateApiKeyBadge();
+    checkBackendHealth();
+    renderPresetChips('all');
+  </script>
+</body>
+</html>
